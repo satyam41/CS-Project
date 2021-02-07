@@ -4,6 +4,9 @@ host = input("Enter your host name: ")
 user = input("Enter your user name: ")
 password = input("Enter your mysql password: ")
 while True:
+    dataBase = ['1.mydb','2.library']
+    for base in dataBase:
+        print(base)
     databases = input("Enter database which you want to connect: ")
 
     con = sql.connect(host=host, user=user,passwd=password, database=databases)

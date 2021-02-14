@@ -4,13 +4,13 @@ host = input("Enter your host name: ")
 user = input("Enter your user name: ")
 password = input("Enter your mysql password: ")
 while True:
-    dataBase = ['1.mydb','2.library']
+    dataBase = ['1.mydb','2.library','3.addmin']
     for base in dataBase:
         print(base)
     databases = input("Enter database which you want to connect: ")
 
     con = sql.connect(host=host, user=user,passwd=password, database=databases)
-    # con = sql.connect(host="localhost", user="root", passwd="satyam", database="library")
+    # con = sql.connect(host="localhost", user="root", passwd="satyam", database="addmin")
     # For database mydb 
 
     if con.is_connected() == True:
@@ -320,7 +320,48 @@ while True:
                 else:
                     print("Thank You for using this app.")
                     break
+        
+        elif (databases == "addmin"):
+            while True:
+                cur = con.cursor()
+                print('''======Welcome to KVS=======''')
+                print('''
+                Please choose correct option for do your opration smoothly: 
+                    1.Display all records.
+                    2.Take addmination in KVS.
+                    3.Take TC from KV.
+                ''')
+                choice = int(input("Choose your option (1-3): "))
+                if choice == 1:
+                    cur.execute("select * from school")
+                    for row in cur:
+                        print(row)
+                
+                elif choice == 2:
+                    addno = input("Enter addmination number of the student: ")
+                    roll = input("Enter roll number of the student: ")
+                    name = input("Enter name of the student: ")
+                    value = "insert into school Values ({}, {}, '{}')".format(addno, roll, name)
+                    cur.execute(value)
+                    print(f"{name} is addmitied in KVS. Welcome to KVS.....")
+                    con.commit()
+                
+                elif choice == 3:
+                    addno = input("Enter addmination number of the student: ")
+                    delete = "delete from school where admno = {}".format(addno)
+                    cur.execute(delete)
+                    print("You get successfully T.C. from KVS.")
+                    con.commit()
+                
+                else:
+                    print("Please choose correct option!!!\nInvalid Option!!!!")
 
+                cont = input(f"Do you wnat to continue with {databases}? If yes type 'Y' else type 'N' : ")
+                if (cont == 'Y' or cont == 'y'):
+                    continue
+                else:
+                    print("Thank You for using this app.")
+                    break
     else:
         print("Connection unsuccessful")
 

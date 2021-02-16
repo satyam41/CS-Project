@@ -1,0 +1,3 @@
+In this project we can first import mysql conncetor than conncet your database with python than check the conncection is successfully connected or not.
+Then make a list of database to show to the user to choose his/her option.
+Give the menubar to choose the option for go ahead.

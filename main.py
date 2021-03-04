@@ -363,7 +363,7 @@ while True:
 
                 elif choice == 3:
                     addno = input("Enter addmination number of the student: ")
-                    delete = "delete from school where admno = {}".format(addno)
+                    delete = "delete from school where addmno = {}".format(addno)
                     cur.execute(delete)
                     print("You get successfully T.C. from KVS.")
                     con.commit()

@@ -1,4 +1,5 @@
 import mysql.connector as sql
+
 print("First you connect with database than do what you want to do.")
 host = input("Enter your host name: ")
 user = input("Enter your user name: ")
@@ -17,7 +18,7 @@ while True:
         if databases == "mydb":
             print("Connection Successfully set-up")
             cur = con.cursor()
-            while (True):
+            while True:
                 print("Select which table you want to access: ")
                 listOfTable = ["1.EMP", "2.STUDENT"]
                 for name in listOfTable:
@@ -30,7 +31,7 @@ while True:
                     2.Insert records.
                     3.Update records.
                     4.Delete records.
-                    5.Serach records.
+                    5.Search records.
                     6.Exit.
                 ''')
                 choice = int(input("Enter your choice 1 to 6: "))
@@ -48,14 +49,15 @@ while True:
                     if tableName == "emp":
                         # for emp table.
                         commTake = input("Employee take commission? If yes type 'y' else no type 'n': ")
-                        if (commTake == 'n' or commTake == 'n'):
+                        if commTake == 'n' or commTake == 'n':
                             empno = input("Enter employee number: ")
                             ename = input("Enter employee name: ")
                             job = input("Enter employee job: ")
                             gender = input("Enter employee gender: ")
                             sal = input("Enter salary of the employee:")
                             deptno = input("Enter department number: ")
-                            value = "insert into emp (empno,ename,job,gender,sal,deptno) VALUES ({}, '{}', '{}', '{}', {} ,{})".format(empno, ename, job, gender, sal, deptno)
+                            value = "insert into emp (empno,ename,job,gender,sal,deptno) VALUES ({}, '{}', '{}', '{}', {} ,{})".format(
+                                empno, ename, job, gender, sal, deptno)
                             cur.execute(value)
                             print("Your records is successfully inserted.....")
                             con.commit()
@@ -67,7 +69,8 @@ while True:
                             sal = input("Enter salary of the employee: ")
                             comm = input("Enter comission of the employee: ")
                             deptno = input("Enter department number: ")
-                            value = "insert into emp (empno,ename,job,gender,sal,comm,deptno) VALUES ({},'{}','{}','{}',{},{},{})".format(empno, ename, job, gender, sal, comm, deptno)
+                            value = "insert into emp (empno,ename,job,gender,sal,comm,deptno) VALUES ({},'{}','{}','{}',{},{},{})".format(
+                                empno, ename, job, gender, sal, comm, deptno)
                             cur.execute(value)
                             print("Your records is successfully inserted.....")
                             con.commit()
@@ -81,7 +84,8 @@ while True:
                         std = input("Enter standered of the student: ")
                         sec = input("Enter section of the student: ")
                         city = input("Enter city of the student: ")
-                        values = "insert into student values ({}, '{}', '{}', '{}','{}')".format(roll, name, std, sec, city)
+                        values = "insert into student values ({}, '{}', '{}', '{}','{}')".format(roll, name, std, sec,
+                                                                                                 city)
                         cur.execute(values)
                         print("Your records is successfully inserted.....")
                         con.commit()
@@ -100,7 +104,7 @@ while True:
 
                         if updateChoice == 1:
                             newSal = input("Enter updated salary of the employee: ")
-                            empNo = input( "Enter employee id to update their salary: ")
+                            empNo = input("Enter employee id to update their salary: ")
                             cur.execute("update emp set sal = {} where empno = {}".format(newSal, empNo))
                             print("Your records is updated.....")
                             con.commit()
@@ -142,28 +146,28 @@ while True:
                         if updateOption == 1:
                             newCity = input("Enter new city of the student: ")
                             roll = input("Enter roll number of the student to update their city: ")
-                            cur.execute("update student set city = '{}' where rollno = {}".format(newCity, roll))
+                            cur.execute("update student set city = '{}' where roll = {}".format(newCity, roll))
                             print("Your records is updated.....")
                             con.commit()
 
                         elif updateOption == 2:
                             newMarks = input("Enter new marks of the student: ")
                             roll = input("Enter roll number of the student to update their marks: ")
-                            cur.execute("update student set marks = {} where rollno = {}".format(newMarks, roll))
+                            cur.execute("update student set marks = {} where roll = {}".format(newMarks, roll))
                             print("Your records is updated.....")
                             con.commit()
 
                         elif updateOption == 3:
                             newName = input("Enter updated name of the student: ")
                             roll = input("Enter roll number of the studnet to update their name: ")
-                            cur.execute("update student set name = '{}' where rollno = {}".format(newName, roll))
+                            cur.execute("update student set name = '{}' where roll = {}".format(newName, roll))
                             print("Your records is successfully updated.....")
                             con.commit()
 
                         elif updateOption == 4:
                             newClass = input("Enter updated class of the student: ")
                             roll = input("Enter roll number of the student to update their class: ")
-                            cur.execute("update student set class = '{}' where rollno = {}".format(newClass, roll))
+                            cur.execute("update student set class = '{}' where roll = {}".format(newClass, roll))
                             print("Your records is successfully updated.....")
                             con.commit()
 
@@ -181,7 +185,7 @@ while True:
                         con.commit()
                     elif tableName == "student":
                         roll = input("Enter student roll number: ")
-                        deleteRoll = "delete from student where rollno = {}".format(roll)
+                        deleteRoll = "delete from student where roll = {}".format(roll)
                         cur.execute(deleteRoll)
                         print("Your records is successfully deleted.....")
                         con.commit()
@@ -253,7 +257,7 @@ while True:
                             studentRoll = int(
                                 input("Enter roll number of the student: "))
                             try:
-                                cur.execute("select * from student where rollno = {}".format(studentRoll))
+                                cur.execute("select * from student where roll = {}".format(studentRoll))
                                 rollList = []
                                 roll = cur.fetchone()
                                 for one in roll:
@@ -280,14 +284,14 @@ while True:
                 elif choice == 6:
                     print("Thank You!!!")
                     break
-                cont = input(f"Do you wnat to continue with {databases}? If yes type 'Y' else type 'N' : ")
-                if (cont == 'Y' or cont == 'y'):
+                cont = input(f"Do you want to continue with {databases}? If yes type 'Y' else type 'N' : ")
+                if cont == 'Y' or cont == 'y':
                     continue
                 else:
                     print("Thank You for using this app.")
                     break
 
-    # for database library
+        # for database library
         elif databases == "library":
             while (True):
                 curr = con.cursor()
@@ -322,7 +326,8 @@ while True:
                     publish = input("Enter publisher name: ")
                     price = input("Enter book price: ")
                     type_ = input("Enter type of the book: ")
-                    value = "insert into book VALUES ({},'{}','{}','{}',{},'{}')".format(book_id, bookName, authorName, publish, price, type_)
+                    value = "insert into book VALUES ({},'{}','{}','{}',{},'{}')".format(book_id, bookName, authorName,
+                                                                                         publish, price, type_)
                     curr.execute(value)
                     print("You have return the book which you have issue now you have issue any book to the library.")
                     con.commit()
@@ -371,8 +376,8 @@ while True:
                 else:
                     print("Please choose correct option!!!\nInvalid Option!!!!")
 
-                cont = input(f"Do you wnat to continue with {databases}? If yes type 'Y' else type 'N' : ")
-                if (cont == 'Y' or cont == 'y'):
+                cont = input(f"Do you want to continue with {databases}? If yes type 'Y' else type 'N' : ")
+                if cont == 'Y' or cont == 'y':
                     continue
                 else:
                     print("Thank You for using this app.")
@@ -381,8 +386,8 @@ while True:
         print("Connection unsuccessful")
 
     con.close()
-    cont = input("Do you wnat to continue with this app? If yes type 'Y' else type 'N' : ")
-    if (cont == 'Y' or cont == 'y'):
+    cont = input("Do you want to continue with this app? If yes type 'Y' else type 'N' : ")
+    if cont == 'Y' or cont == 'y':
         continue
     else:
         print("Thank You for using this app.")
